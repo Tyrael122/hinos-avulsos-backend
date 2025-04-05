@@ -26,8 +26,6 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean package
-        env:
-          SPRING_DATA_MONGODB_URI: ${{ secrets.PROD_MONGODB_URI }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -57,6 +55,19 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5F76B53ACB554211B57C4F8B520E8FE7 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0132AF96AF60469BBC7AA1C8040B2939 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_01DFC6823D574B798F50A773A2B76CF6 }}
+
+      - name: Configure Azure App Settings
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: 'hinos-avulsos'
+          app-settings-json: |
+            [
+              {
+                "name": "SPRING_DATA_MONGODB_URI",
+                "value": "${{ secrets.PROD_MONGODB_URI }}",
+                "slotSetting": false
+              }
+            ]
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
