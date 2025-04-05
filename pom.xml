@@ -65,21 +65,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure-webapp-maven-plugin</artifactId>
-                <version>2.14.1</version>
-                <configuration>
-                    <resourceGroup>hinos-avulsos_group</resourceGroup>
-                    <appName>hinos-avulsos</appName>
-                    <runtime>
-                        <os>Linux</os>
-                        <javaVersion>Java 21</javaVersion>
-                        <webContainer>Java SE</webContainer>
-                    </runtime>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
